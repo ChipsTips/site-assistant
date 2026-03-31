@@ -355,7 +355,7 @@
 //  CONFIG — credentials pre-configured
 // ═══════════════════════════════════════════════
 let config = {
-  apiKey:         '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',
+  apiKey:         'cloudflare-managed',
   assistantId:    'asst_QKs8dwl70YagOQLsOlv0w5q4',
   welcomeMessage: 'Hi! Ask me anything about Hearst California advertising rates and resources.'
 };
@@ -384,7 +384,7 @@ async function getOrCreateThread() {
   const res = await fetch('https://bold-feather-0757.michael-chiprich.workers.dev/v1/threads', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${config.apiKey}`,
+      'Authorization': 'Bearer cloudflare-managed',
       'Content-Type': 'application/json',
       'OpenAI-Beta': 'assistants=v2'
     },
@@ -445,7 +445,7 @@ async function sendMessage() {
     await fetch(`https://bold-feather-0757.michael-chiprich.workers.dev/v1/threads/${tid}/messages`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${config.apiKey}`,
+        'Authorization': 'Bearer cloudflare-managed',
         'Content-Type': 'application/json',
         'OpenAI-Beta': 'assistants=v2'
       },
@@ -456,7 +456,7 @@ async function sendMessage() {
     const runRes = await fetch(`https://bold-feather-0757.michael-chiprich.workers.dev/v1/threads/${tid}/runs`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${config.apiKey}`,
+        'Authorization': 'Bearer cloudflare-managed',
         'Content-Type': 'application/json',
         'OpenAI-Beta': 'assistants=v2'
       },
@@ -494,7 +494,7 @@ async function pollRun(tid, runId) {
 
     const res = await fetch(`https://bold-feather-0757.michael-chiprich.workers.dev/v1/threads/${tid}/runs/${runId}`, {
       headers: {
-        'Authorization': `Bearer ${config.apiKey}`,
+        'Authorization': 'Bearer cloudflare-managed',
         'OpenAI-Beta': 'assistants=v2'
       }
     });
@@ -517,7 +517,7 @@ async function pollRun(tid, runId) {
 async function getLatestMessage(tid) {
   const res = await fetch(`https://bold-feather-0757.michael-chiprich.workers.dev/v1/threads/${tid}/messages?limit=1&order=desc`, {
     headers: {
-      'Authorization': `Bearer ${config.apiKey}`,
+      'Authorization': 'Bearer cloudflare-managed',
       'OpenAI-Beta': 'assistants=v2'
     }
   });
