@@ -381,7 +381,7 @@ function showChat() {
 async function getOrCreateThread() {
   if (threadId) return threadId;
 
-  const res = await fetch('https://api.openai.com/v1/threads', {
+  const res = await fetch('https://bold-feather-0757.michael-chiprich.workers.dev/v1/threads', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${config.apiKey}`,
@@ -442,7 +442,7 @@ async function sendMessage() {
     const tid = await getOrCreateThread();
 
     // Add message to thread
-    await fetch(`https://api.openai.com/v1/threads/${tid}/messages`, {
+    await fetch(`https://bold-feather-0757.michael-chiprich.workers.dev/v1/threads/${tid}/messages`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${config.apiKey}`,
@@ -453,7 +453,7 @@ async function sendMessage() {
     });
 
     // Create run
-    const runRes = await fetch(`https://api.openai.com/v1/threads/${tid}/runs`, {
+    const runRes = await fetch(`https://bold-feather-0757.michael-chiprich.workers.dev/v1/threads/${tid}/runs`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${config.apiKey}`,
@@ -492,7 +492,7 @@ async function pollRun(tid, runId) {
   while (Date.now() - start < maxWait) {
     await sleep(interval);
 
-    const res = await fetch(`https://api.openai.com/v1/threads/${tid}/runs/${runId}`, {
+    const res = await fetch(`https://bold-feather-0757.michael-chiprich.workers.dev/v1/threads/${tid}/runs/${runId}`, {
       headers: {
         'Authorization': `Bearer ${config.apiKey}`,
         'OpenAI-Beta': 'assistants=v2'
@@ -515,7 +515,7 @@ async function pollRun(tid, runId) {
 }
 
 async function getLatestMessage(tid) {
-  const res = await fetch(`https://api.openai.com/v1/threads/${tid}/messages?limit=1&order=desc`, {
+  const res = await fetch(`https://bold-feather-0757.michael-chiprich.workers.dev/v1/threads/${tid}/messages?limit=1&order=desc`, {
     headers: {
       'Authorization': `Bearer ${config.apiKey}`,
       'OpenAI-Beta': 'assistants=v2'
