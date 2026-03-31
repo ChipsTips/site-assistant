@@ -58,115 +58,7 @@
     z-index: 0;
   }
 
-  /* SETUP SCREEN */
-  #setup-screen {
-    position: absolute;
-    inset: 0;
-    background: var(--bg);
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 32px;
-    gap: 20px;
-  }
-
-  #setup-screen.hidden { display: none; }
-
-  .setup-logo {
-    width: 48px; height: 48px;
-    background: var(--accent-dim);
-    border: 1px solid var(--accent);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    box-shadow: 0 0 24px var(--accent-glow);
-  }
-
-  .setup-title {
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: -0.3px;
-    text-align: center;
-  }
-
-  .setup-subtitle {
-    color: var(--text-muted);
-    font-size: 13px;
-    text-align: center;
-    max-width: 320px;
-    line-height: 1.7;
-  }
-
-  .setup-fields {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    max-width: 380px;
-  }
-
-  .field-label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-  }
-
-  .setup-input {
-    width: 100%;
-    padding: 11px 14px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    color: var(--text);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .setup-input::placeholder { color: var(--text-muted); }
-  .setup-input:focus { border-color: var(--accent); }
-
-  .setup-hint {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 4px;
-    line-height: 1.5;
-  }
-  .setup-hint a { color: var(--accent); text-decoration: none; }
-  .setup-hint a:hover { text-decoration: underline; }
-
-  .setup-btn {
-    width: 100%;
-    max-width: 380px;
-    padding: 13px;
-    background: var(--accent);
-    color: #0a1a13;
-    border: none;
-    border-radius: var(--radius-sm);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    cursor: pointer;
-    transition: opacity 0.2s, box-shadow 0.2s;
-    letter-spacing: -0.1px;
-  }
-  .setup-btn:hover { opacity: 0.9; box-shadow: 0 0 20px var(--accent-glow); }
-
-  .setup-warning {
-    font-size: 11px;
-    color: #f59e0b;
-    background: rgba(245,158,11,0.08);
-    border: 1px solid rgba(245,158,11,0.2);
-    border-radius: 6px;
-    padding: 10px 12px;
-    max-width: 380px;
-    line-height: 1.6;
-  }
+  
 
   /* CHAT SCREEN */
   #chat-screen {
@@ -421,37 +313,6 @@
 </head>
 <body>
 <div id="widget-root">
-
-  <!-- ═══════════════ SETUP SCREEN ═══════════════ -->
-  <div id="setup-screen">
-    <div class="setup-logo">🔮</div>
-    <div class="setup-title">Configure Your Assistant</div>
-    <div class="setup-subtitle">Enter your OpenAI credentials to activate the site assistant. These are stored only in your browser.</div>
-
-    <div class="setup-fields">
-      <div>
-        <div class="field-label">OpenAI API Key</div>
-        <input class="setup-input" id="api-key-input" type="password" placeholder="sk-proj-..." autocomplete="off"/>
-        <div class="setup-hint">Get your key at <a href="https://platform.openai.com/api-keys" target="_blank">platform.openai.com/api-keys</a></div>
-      </div>
-      <div>
-        <div class="field-label">Assistant ID</div>
-        <input class="setup-input" id="assistant-id-input" type="text" placeholder="asst_..." autocomplete="off"/>
-        <div class="setup-hint">Create an Assistant at <a href="https://platform.openai.com/assistants" target="_blank">platform.openai.com/assistants</a> and paste its ID here.</div>
-      </div>
-      <div>
-        <div class="field-label">Welcome Message (optional)</div>
-        <input class="setup-input" id="welcome-input" type="text" placeholder="Hi! Ask me anything about this site…"/>
-      </div>
-    </div>
-
-    <div class="setup-warning">
-      ⚠️ <strong>Important:</strong> For a production site, your API key should live in a backend proxy, not in the browser. This setup is ideal for internal/private Google Sites where you control who has access.
-    </div>
-
-    <button class="setup-btn" onclick="saveConfig()">Activate Assistant →</button>
-  </div>
-
   <!-- ═══════════════ CHAT SCREEN ═══════════════ -->
   <div id="chat-screen">
     <div id="chat-header">
@@ -491,14 +352,12 @@
 
 <script>
 // ═══════════════════════════════════════════════
-//  CONFIG
+//  CONFIG — credentials pre-configured
 // ═══════════════════════════════════════════════
-const STORAGE_KEY = 'site_assistant_config';
-
 let config = {
-  apiKey: '',
-  assistantId: '',
-  welcomeMessage: ''
+  apiKey:         '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',
+  assistantId:    'asst_QKs8dwl70YagOQLsOlv0w5q4',
+  welcomeMessage: 'Hi! Ask me anything about Hearst California advertising rates and resources.'
 };
 
 let threadId = null;
@@ -508,47 +367,12 @@ let isLoading = false;
 //  INIT
 // ═══════════════════════════════════════════════
 function init() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    try {
-      config = JSON.parse(saved);
-      if (config.apiKey && config.assistantId) {
-        showChat();
-        return;
-      }
-    } catch(e) {}
-  }
-  document.getElementById('setup-screen').classList.remove('hidden');
-}
-
-function saveConfig() {
-  const apiKey = document.getElementById('api-key-input').value.trim();
-  const assistantId = document.getElementById('assistant-id-input').value.trim();
-  const welcome = document.getElementById('welcome-input').value.trim();
-
-  if (!apiKey || !assistantId) {
-    alert('Please enter both your API key and Assistant ID.');
-    return;
-  }
-  if (!apiKey.startsWith('sk-')) {
-    alert('That doesn\'t look like a valid OpenAI API key (should start with sk-).');
-    return;
-  }
-  if (!assistantId.startsWith('asst_')) {
-    alert('That doesn\'t look like a valid Assistant ID (should start with asst_).');
-    return;
-  }
-
-  config = { apiKey, assistantId, welcomeMessage: welcome };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+  // Credentials pre-configured — go straight to chat
   showChat();
 }
 
 function showChat() {
-  document.getElementById('setup-screen').classList.add('hidden');
-  if (config.welcomeMessage) {
-    document.getElementById('welcome-text').textContent = config.welcomeMessage;
-  }
+  document.getElementById('welcome-text').textContent = config.welcomeMessage;
 }
 
 // ═══════════════════════════════════════════════
